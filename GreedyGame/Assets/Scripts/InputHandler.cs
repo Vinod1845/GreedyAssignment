@@ -26,6 +26,7 @@ public class InputHandler : MonoBehaviour
         if (ureq.isNetworkError || ureq.isHttpError)
         {
             Debug.Log(ureq.error);
+            AdController.instance.DownloadFail();
         }
         else
         {
@@ -66,6 +67,7 @@ public class InputHandler : MonoBehaviour
         yield return ureq.SendWebRequest();
         if (ureq.isNetworkError || ureq.isHttpError)
         {
+            AdController.instance.DownloadFail();
             Debug.Log(ureq.error);
         }
         else
@@ -86,10 +88,10 @@ public class InputHandler : MonoBehaviour
                 if (data["layers"][i]["type"].ToString() == "frame")
                 {
                     AdController.instance.adData.frameLayer.bgPath = data["layers"][i]["path"].ToString();
-                    AdController.instance.adData.frameLayer.xPosition = (float)data["layers"][i]["placement"][0]["position"]["x"];
-                    AdController.instance.adData.frameLayer.yPosition = (float)data["layers"][i]["placement"][0]["position"]["y"];
-                    AdController.instance.adData.frameLayer.width = (float)data["layers"][i]["placement"][0]["position"]["width"];
-                    AdController.instance.adData.frameLayer.height = (float)data["layers"][i]["placement"][0]["position"]["height"];
+                    AdController.instance.adData.frameLayer.xPosition =(float)data["layers"][i]["placement"][0]["position"]["x"];
+                    AdController.instance.adData.frameLayer.yPosition =(float)data["layers"][i]["placement"][0]["position"]["y"];
+                    AdController.instance.adData.frameLayer.width =(float)data["layers"][i]["placement"][0]["position"]["width"];
+                    AdController.instance.adData.frameLayer.height =(float)data["layers"][i]["placement"][0]["position"]["height"];
                     for (int j = 0; j < data["layers"][i]["operations"].Count; j++)//Making For loop now jus color only given in future if we give more data we can add (eg.Font size)
                     {
                         if (data["layers"][i]["operations"][j]["name"].ToString() == "color")
@@ -101,8 +103,8 @@ public class InputHandler : MonoBehaviour
                 }
             }
             //print("Height is" + AdController.instance.adData.frameLayer.imagePath);
+            StartCoroutine(DownloadFrameImage());
         }
-        StartCoroutine(DownloadFrameImage());
     }
     IEnumerator DownloadFrameImage()
     {
@@ -113,6 +115,7 @@ public class InputHandler : MonoBehaviour
         {
             Debug.Log(www.error);
             AdController.instance.adData.frameLayer.frameBg = null;
+            AdController.instance.DownloadFail();
         }
         else
         {

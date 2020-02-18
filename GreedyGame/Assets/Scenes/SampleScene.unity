@@ -304,7 +304,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adData: {fileID: 11400000, guid: 6b341204ba025af49b428f80663673a8, type: 2}
-  bg: {fileID: 0}
   ui: {fileID: 1884166132}
   textPrefab: {fileID: 6708904229108211612, guid: 6bc4f4b0162f559478092d693965bc4a,
     type: 3}
@@ -449,7 +448,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1809245594
 RectTransform:
   m_ObjectHideFlags: 0
@@ -500,9 +499,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Ad Laoding!!
-
-    CheckConnection!!'
+  m_Text: InValidTemplate
 --- !u!222 &1809245596
 CanvasRenderer:
   m_ObjectHideFlags: 0
